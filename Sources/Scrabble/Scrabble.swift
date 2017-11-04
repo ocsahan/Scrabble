@@ -12,10 +12,9 @@ let tileScore  = ["a": 1, "c": 3, "b": 3, "e": 1, "d": 2, "g": 2,
 
 public struct Word: Equatable, Comparable {
   var score: Int
-  var definition: String
   var word: String
   var description: String {
-    return "\(self.word) means -\(self.definition)- and is worth \(self.score) points.\n"
+    return "\(self.word) \(self.score)\n"
   }
   var letterCount: [Character:Int] = [:]
   public static var wordList: [Word] {
@@ -31,9 +30,8 @@ public struct Word: Equatable, Comparable {
             let rangeWord = line.startIndex..<line.index(line.startIndex, offsetBy: 3)
             let rangeDef = line.index(line.startIndex, offsetBy: 4)..<line.endIndex
             let word = line[rangeWord]
-            let definition = line[rangeDef]
             do {
-              try wordList.append(Word(word: String(word), definition: String(definition)))
+              try wordList.append(Word(word: String(word))
             }
             catch {
               throw error
@@ -48,9 +46,8 @@ public struct Word: Equatable, Comparable {
     }
   }
 
-  public init(word: String, definition: String) throws {
+  public init(word: String) throws {
     self.word = word
-    self.definition = definition
     var sum = 0
     let characters = Array(self.word)
     for char in characters {
