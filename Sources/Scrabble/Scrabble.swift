@@ -47,7 +47,7 @@ public struct Word: Equatable, Comparable {
     for char in characters {
       sum += tileScore[String(char).lowercased()]!
       if letterCount[char] == nil {
-        letterCount[char] = 0
+        letterCount[char] = 1
       }
       else {
         letterCount[char]! += 1
