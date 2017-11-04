@@ -28,10 +28,9 @@ public struct Word: Equatable, Comparable {
         for line in commonWordFile.components(separatedBy: CharacterSet.newlines) {
           if line.count > 0 {
             let rangeWord = line.startIndex..<line.index(line.startIndex, offsetBy: 3)
-            let rangeDef = line.index(line.startIndex, offsetBy: 4)..<line.endIndex
             let word = line[rangeWord]
             do {
-              try wordList.append(Word(word: String(word))
+              try wordList.append(Word(word: String(word)))
             }
             catch {
               throw error
