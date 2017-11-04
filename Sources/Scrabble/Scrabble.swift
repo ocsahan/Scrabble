@@ -65,7 +65,7 @@ public struct Word: Equatable, Comparable {
   }
 }
 
-public func isSubset(rack: Word, threeLetter: Word) -> Bool {
+public static func isSubset(rack: Word, threeLetter: Word) -> Bool {
   for pair in threeLetter.letterCount {
     if rack.letterCount[pair.key] == threeLetter.letterCount[pair.key] {
       continue
