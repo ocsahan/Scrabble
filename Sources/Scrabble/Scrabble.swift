@@ -10,10 +10,10 @@ let tileScore  = ["a": 1, "c": 3, "b": 3, "e": 1, "d": 2, "g": 2,
 "r": 1, "u": 1, "t": 1, "w": 4, "v": 4, "y": 4,
 "x": 8, "z": 10]
 
-public struct Word: Equatable, Comparable {
+public struct Word: Equatable, Comparable, CustomStringConvertible {
   var score: Int
   var word: String
-  var description: String {
+  public var description: String {
     return "\(self.word) \(self.score)\n"
   }
   var letterCount: [Character:Int] = [:]
