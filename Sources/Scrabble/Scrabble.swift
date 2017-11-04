@@ -18,7 +18,8 @@ public struct Word: Equatable, Comparable {
     get {
       var wordList: [Word] = []
       do {
-        let commonWordFile = try String(contentsOfFile: "3letter_words.txt")
+        // Make sure the importing module has this file in its root directory
+        let commonWordFile = try String(contentsOfFile: "../../3letter_words.txt")
         for line in commonWordFile.components(separatedBy: CharacterSet.newlines) {
           if line.count > 0 {
             let rangeWord = line.startIndex..<line.index(line.startIndex, offsetBy: 3)
