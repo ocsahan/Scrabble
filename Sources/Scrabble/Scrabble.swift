@@ -46,7 +46,7 @@ public struct Word: Equatable, Comparable {
   }
 
   public init(word: String) throws {
-    self.word = word
+    self.word = word.uppercased()
     var sum = 0
     let characters = Array(self.word)
     for char in characters {
