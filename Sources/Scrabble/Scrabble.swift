@@ -21,7 +21,7 @@ public struct Word: Equatable, Comparable {
         // Make sure the importing module has this file in its root directory
         // Bad practice, but can't find information on how to use relative path within imported module
         // Maybe I can export the file as a dependency? I don't know.
-        let commonWordFile = try String(contentsOfFile: "../../3letter_words.txt")
+        let commonWordFile = try String(contentsOfFile: "3letter_words.txt")
         for line in commonWordFile.components(separatedBy: CharacterSet.newlines) {
           if line.count > 0 {
             let rangeWord = line.startIndex..<line.index(line.startIndex, offsetBy: 3)
