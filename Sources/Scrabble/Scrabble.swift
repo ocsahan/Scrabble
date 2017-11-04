@@ -1,5 +1,9 @@
 import Foundation
 
+enum WordError : Error {
+case doesNotContainOnlyLetters
+}
+
 let tileScore  = ["a": 1, "c": 3, "b": 3, "e": 1, "d": 2, "g": 2,
 "f": 4, "i": 1, "h": 4, "k": 5, "j": 8, "m": 3,
 "l": 1, "o": 1, "n": 1, "q": 10, "p": 3, "s": 1,
@@ -28,7 +32,12 @@ public struct Word: Equatable, Comparable {
             let rangeDef = line.index(line.startIndex, offsetBy: 4)..<line.endIndex
             let word = line[rangeWord]
             let definition = line[rangeDef]
-            wordList.append(Word(word: String(word), definition: String(definition)))
+            do {
+              try wordList.append(Word(word: String(word), definition: String(definition)))
+            }
+            catch {
+              throw error
+            }
           }
         }
       }
@@ -39,13 +48,16 @@ public struct Word: Equatable, Comparable {
     }
   }
 
-  public init(word: String, definition: String) {
+  public init(word: String, definition: String) throws {
     self.word = word
     self.definition = definition
     var sum = 0
     let characters = Array(self.word)
     for char in characters {
-      sum += tileScore[String(char).lowercased()]!
+      guard tileScore[String(char).lowercased()] != nil else {
+        throw WordError.doesNotContainOnlyLetters
+      }
+      sum +=  tileScore[String(char).lowercased()]!
       if letterCount[char] == nil {
         letterCount[char] = 1
       }
@@ -65,7 +77,7 @@ public struct Word: Equatable, Comparable {
   }
 }
 
-public static func isSubset(rack: Word, threeLetter: Word) -> Bool {
+public func isSubset(rack: Word, threeLetter: Word) -> Bool {
   for pair in threeLetter.letterCount {
     if rack.letterCount[pair.key] == threeLetter.letterCount[pair.key] {
       continue
